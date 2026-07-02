@@ -1,6 +1,36 @@
 import random
 import tkinter as tk
 from tkinter import messagebox, ttk
+from PIL import Image, ImageTk, ImageSequence
+
+
+
+class AnimatedGifLabel(tk.Label):
+    def __init__(self, master, gif_path, size=(200, 200), delay=50):
+        super().__init__(master)
+        self.delay = delay  
+        self.frames = []
+        
+        try:
+            with Image.open(gif_path) as img:
+                for frame in ImageSequence.Iterator(img):
+                    resized_frame = frame.resize(size, Image.Resampling.LANCZOS)
+                    self.frames.append(ImageTk.PhotoImage(resized_frame))
+                        
+            self.idx = 0
+            self.animate()
+        except FileNotFoundError:
+            self.configure(text="[GIF file not found]", fg="red")
+
+    def animate(self):
+        if self.frames:
+            self.configure(image=self.frames[self.idx])
+            self.idx = (self.idx + 1) % len(self.frames)
+            self.after(self.delay, self.animate)
+
+
+
+
 
 class Quiz_Maker:
     def __init__(self, root):
@@ -8,11 +38,29 @@ class Quiz_Maker:
         self.root.title("Quiz Maker")
         self.root.geometry("400x350")
 
+        bg_color="#ececec"
+        self.root.configure(bg=bg_color)
+
+        try:
+            opened_img = Image.open(r"c:\Users\juvel.jaison\Documents\Visual Studio 2022\quiz_logo.png")
+            tk_img = ImageTk.PhotoImage(opened_img)
+            resized_img = opened_img.resize((150, 150), Image.Resampling.LANCZOS)
+            
+            tk_img = ImageTk.PhotoImage(resized_img)
+            label = tk.Label(root, image=tk_img)
+            label.image = tk_img 
+            label.pack(pady=10)
+
+        except FileNotFoundError:
+            # Fallback label in case your image path is missing during testing
+            error_label = tk.Label(root, text="[Image file not found - check path]", fg="red")
+            error_label.pack()
         self.quiz_database = {"Math": [{"q":"what is 7x 8", "a": ["54","56","64","48"],"c":"56", "h":"It is an even number in the 50s."},
                                        {"q": "What is the square root of 144","a":["10","11","12","13"],"c": "12", "h": "Think of dozens"},
                                        {"q": "Solve for x: 2x + 5 = 15","a" : ["5","10","15","20"], "c": "5", "h": "subtract 5 from 15 first."},
                                        {"q": "How many sides does a heptagon have?", "a":["6","7","8","9"], "c": "7", "h":"More than a hexagon, fewer than an octagon."},
-                                       {"q": "What is 15 percent of 200?", "a":["15","20","30","35"], "c": "30", "h":"10 percent of 200 is 20."}], 
+                                       {"q": "What is 15 percent of 200?", "a":["15","20","30","35"], "c": "30", "h":"10 percent of 200 is 20."},
+                                       {"q": "What is the next prime number after 7","a":["15","23","11","65"],"c":"11", "h":"It is a two-digit odd number less than 13."}], 
                             "Science": [{"q": "What is the chemical symbol of water", "a":["H20","CO2","O2","NaCL"], "c": "H20", "h":"Two part hydrogen and one oxygen"},
                                         {"q": "What planets is knowed as the red planet", "a":["Earth","Mars","Jupiter","Pluto"], "c": "Mars", "h":"It is named after a roman god."},
                                         {"q": "What is the powerhouse of the cell?", "a":["Nucleus","Mitochondria","Ribosome","Golgi appara"], "c": "Mitochondria", "h":"Start with M"},
@@ -22,7 +70,8 @@ class Quiz_Maker:
                                        {"q":"In which year did War World 2 End?", "a": ["1918","1939","1945","1950"],"c":"1945", "h":"The war lasted six years, starting in 1939"},
                                        {"q":"Which Empire Built the colosseum", "a": ["Greek Empire","Roman Empire","Eygptian Empire","British Empire"],"c":"Roman Empire", "h":"Look closely at the location that is mentioned in the question."},
                                        {"q":"Who was the first person to travel to space", "a": ["Yuri Gargarin","Neil Armstrong","Buzz aldrin","48"],"c":"Yuri Gargarin", "h":"He was a soviet Csomonaut."},
-                                       {"q":"The Magna Carta was signed in which country?", "a": ["France","Germany","England","Italy"],"c":"England", "h":"It was signed by king John in 1215"}],
+                                       {"q":"The Magna Carta was signed in which country?", "a": ["France","Germany","England","Italy"],"c":"England", "h":"It was signed by king John in 1215"},
+                                       {"q":"The Great Pyramid of Giza was built as a tomb for which pharaoh?", "a": ["Pharaoh Khufu","Cleopatra","Pharaoh of the Exodus","Shishak "],"c":"Pharaoh Khufu", "h":"He was the son of Pharaoh Sneferu, and his own son, Khafre, built the second-largest pyramid right next to his."}],
                   "General Knowledge":[{"q":"Which is the largest ocean on Earth?", "a": ["Atlantic Ocean","Indian Ocean","Arctic Ocean","Pacific Ocean"],"c":"Pacific Ocean","h":"It boarders the western coast of the Americans"},
                                         {"q":"How many elements are in the periodic table?", "a": ["98","118","108","128"],"c":"118","h":"The last element added was Oganesson"},
                                         {"q":"What is the capital city of France", "a": ["London","Rome","Paris","Berlin"],"c":"Paris","h":"Home to the Eiffel Tower"},
@@ -31,11 +80,12 @@ class Quiz_Maker:
 
 
 
-        title_Label = tk.Label(root, text= "Quiz Maker",font=("Arial", 24, "bold"))
+        title_Label = tk.Label(root, text= "Quiz Maker",font=("Arial", 24, "bold"),  bg=bg_color)
         title_Label.pack(pady=30)
 
-        start_button = tk.Button(root, text="Start Quiz",font=("Arial", 12), cursor="hand2",command=self.Open_Customization_Panel)
+        start_button = tk.Button(root, text="Start Quiz",font=("Arial", 12), cursor="hand2",command=self.Open_Customization_Panel, bg=bg_color)
         start_button.pack()
+
 
 
     def Open_Customization_Panel(self):
@@ -73,6 +123,12 @@ class Quiz_Maker:
 
 
         tk.Button(self.setting_window, text="Save Setting",command=self.save_setting).pack(pady=20)
+
+
+        self.custom_gif = AnimatedGifLabel(self.setting_window, gif_path=r"c:\Users\juvel.jaison\Downloads\200w.gif", size=(120, 120), delay=50)
+        self.custom_gif.pack(pady=10)
+
+
 
 
     def save_setting(self):
