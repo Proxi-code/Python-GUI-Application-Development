@@ -1,32 +1,9 @@
 import random
 import tkinter as tk
 from tkinter import messagebox, ttk
-from PIL import Image, ImageTk, ImageSequence
 
 
 
-class AnimatedGifLabel(tk.Label):
-    def __init__(self, master, gif_path, size=(200, 200), delay=50):
-        super().__init__(master)
-        self.delay = delay  
-        self.frames = []
-        
-        try:
-            with Image.open(gif_path) as img:
-                for frame in ImageSequence.Iterator(img):
-                    resized_frame = frame.resize(size, Image.Resampling.LANCZOS)
-                    self.frames.append(ImageTk.PhotoImage(resized_frame))
-                        
-            self.idx = 0
-            self.animate()
-        except FileNotFoundError:
-            self.configure(text="[GIF file not found]", fg="red")
-
-    def animate(self):
-        if self.frames:
-            self.configure(image=self.frames[self.idx])
-            self.idx = (self.idx + 1) % len(self.frames)
-            self.after(self.delay, self.animate)
 
 
 
@@ -40,21 +17,6 @@ class Quiz_Maker:
 
         bg_color="#ececec"
         self.root.configure(bg=bg_color)
-
-        try:
-            opened_img = Image.open(r"c:\Users\juvel.jaison\Documents\Visual Studio 2022\quiz_logo.png")
-            tk_img = ImageTk.PhotoImage(opened_img)
-            resized_img = opened_img.resize((150, 150), Image.Resampling.LANCZOS)
-            
-            tk_img = ImageTk.PhotoImage(resized_img)
-            label = tk.Label(root, image=tk_img)
-            label.image = tk_img 
-            label.pack(pady=10)
-
-        except FileNotFoundError:
-            # Fallback label in case your image path is missing during testing
-            error_label = tk.Label(root, text="[Image file not found - check path]", fg="red")
-            error_label.pack()
         self.quiz_database = {"Math": [{"q":"what is 7x 8", "a": ["54","56","64","48"],"c":"56", "h":"It is an even number in the 50s."},
                                        {"q": "What is the square root of 144","a":["10","11","12","13"],"c": "12", "h": "Think of dozens"},
                                        {"q": "Solve for x: 2x + 5 = 15","a" : ["5","10","15","20"], "c": "5", "h": "subtract 5 from 15 first."},
@@ -129,11 +91,6 @@ class Quiz_Maker:
         tk.Button(self.setting_window, text="Save Setting",command=self.save_setting).pack(pady=20)
 
 
-        self.custom_gif = AnimatedGifLabel(self.setting_window, gif_path=r"c:\Users\juvel.jaison\Downloads\200w.gif", size=(120, 120), delay=50)
-        self.custom_gif.pack(pady=10)
-
-
-
 
     def save_setting(self):
         self.selected_category = self.category.get()
@@ -167,8 +124,8 @@ class Quiz_Maker:
 
         self.option_button = []
 
-        for _ in range(4):
-            rb = tk.Radiobutton(self.Quiz_Window, text="",variable=self.answer_var,value="",font=("Arial", 11))
+        for i in range(4):
+            rb = tk.Radiobutton(self.Quiz_Window, text="",variable=self.answer_var,value=str(i),font=("Arial", 11))
             rb.pack(anchor="w",padx=30, pady=3)
             self.option_button.append(rb)
 
@@ -187,7 +144,7 @@ class Quiz_Maker:
         self.question_label.config(text=f"Q{self.current_question_index + 1}: {question['q']}")
 
 
-        self.answer_var.set("")
+        self.answer_var.set("None")
 
         for i, answer in enumerate(question["a"]):
             self.option_button[i].config(text = answer, value = answer)
