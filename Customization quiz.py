@@ -31,7 +31,12 @@ class Quiz_Maker:
                                         {"q": "What planets is knowed as the red planet", "a":["Earth","Mars","Jupiter","Pluto"], "c": "Mars", "h":"It is named after a roman god."},
                                         {"q": "What is the powerhouse of the cell?", "a":["Nucleus","Mitochondria","Ribosome","Golgi appara"], "c": "Mitochondria", "h":"Start with M"},
                                         {"q": "What speed does light travel at approximity", "a":["300,000 km/s"," 150,000 km/s","1,000 km/s","10 km/s"], "c": "300,000 km/s", "h":"it takes about 8 minute from the sun to earth"},
-                                        {"q": "Gas turns directly into solid during...", "a":["Evaporation"," Sublimation","Deposition","Melting"], "c": "Deposition", "h":"Opposite of Sublimation"}],
+                                        {"q": "Gas turns directly into solid during...", "a":["Evaporation"," Sublimation","Deposition","Melting"], "c": "Deposition", "h":"Opposite of Sublimation"},
+                                        {"q": "Which gas do plants absorb from the atmosphere?", "a":["Oxygen"," Nitrogen","Carbon Dioxide","Hydrogen"], "c": "Carbon Dioxide", "h":"Plants use this gas during photosynthesis"},
+                                        {"q": "What is the largest organ in the human body?", "a":["Heart"," Liver","Skin","Brain"], "c": "Skin", "h":"its cover your entire body."},
+                                        {"q": "What force keeps planets orbiting the Sun?", "a":["Magnetism","Gravity","Friction","Electricity"], "c": "Gravity", "h":"it pulls objects toward each others."},
+                                        {"q": "Which planet is the largest in our solar system?", "a":["Saturn","Jupiter","Earth","Neptune"], "c": "Jupiter", "h":"It is famous for the big great rod."},
+                                        {"q": "At what temperature does water freeze in Celsius?", "a":["Evaporation"," Sublimation","Deposition","Melting"], "c": "Deposition", "h":"Opposite of Sublimation"}],
                             "History":[{"q":"Who was the first President of the United States?", "a": ["Thomas Jefferson","George Washington","John Adams","Abraham Lincoln"],"c":"George Washington", "h":"His face was on the one doller bill."},
                                        {"q":"In which year did War World 2 End?", "a": ["1918","1939","1945","1950"],"c":"1945", "h":"The war lasted six years, starting in 1939"},
                                        {"q":"Which Empire Built the colosseum", "a": ["Greek Empire","Roman Empire","Eygptian Empire","British Empire"],"c":"Roman Empire", "h":"Look closely at the location that is mentioned in the question."},
@@ -42,7 +47,8 @@ class Quiz_Maker:
                                         {"q":"How many elements are in the periodic table?", "a": ["98","118","108","128"],"c":"118","h":"The last element added was Oganesson"},
                                         {"q":"What is the capital city of France", "a": ["London","Rome","Paris","Berlin"],"c":"Paris","h":"Home to the Eiffel Tower"},
                                         {"q":"Which language has the most native speakers?", "a": ["English","Spanish","Mandarin","Hindi"],"c":"Mandarin","h":"It is spoken primarily in China."},
-                                        {"q":"How many bones are in an adult human body?", "a": ["206","306","106","267"],"c":"206","h":"Babies actually have more bones than this."}]}
+                                        {"q":"How many bones are in an adult human body?", "a": ["206","306","106","267"],"c":"206","h":"Babies actually have more bones than this."},
+                                        {"q":"What is the world’s tallest building?", "a": ["The Burj Khalifa","Merdeka 118","Shanghai Tower","eiffel tower"],"c":"The Burj Khalifa","h":"this building is located at Downtown Dubai, United Arab Emirates"}]}
 
 
 
