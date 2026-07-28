@@ -36,23 +36,31 @@ class Quiz_Maker:
                                         {"q": "What is the largest organ in the human body?", "a":["Heart"," Liver","Skin","Brain"], "c": "Skin", "h":"its cover your entire body."},
                                         {"q": "What force keeps planets orbiting the Sun?", "a":["Magnetism","Gravity","Friction","Electricity"], "c": "Gravity", "h":"it pulls objects toward each others."},
                                         {"q": "Which planet is the largest in our solar system?", "a":["Saturn","Jupiter","Earth","Neptune"], "c": "Jupiter", "h":"It is famous for the big great rod."},
-                                        {"q": "At what temperature does water freeze in Celsius?", "a":["Evaporation"," Sublimation","Deposition","Melting"], "c": "Deposition", "h":"Opposite of Sublimation"}],
+                                        {"q": "At what temperature does water freeze in Celsius?", "a":["0°C"," 120°C","30°C","12°C"], "c": "0°C", "h":"It is normal air pressure."}],
                             "History":[{"q":"Who was the first President of the United States?", "a": ["Thomas Jefferson","George Washington","John Adams","Abraham Lincoln"],"c":"George Washington", "h":"His face was on the one doller bill."},
                                        {"q":"In which year did War World 2 End?", "a": ["1918","1939","1945","1950"],"c":"1945", "h":"The war lasted six years, starting in 1939"},
                                        {"q":"Which Empire Built the colosseum", "a": ["Greek Empire","Roman Empire","Eygptian Empire","British Empire"],"c":"Roman Empire", "h":"Look closely at the location that is mentioned in the question."},
                                        {"q":"Who was the first person to travel to space", "a": ["Yuri Gargarin","Neil Armstrong","Buzz aldrin","48"],"c":"Yuri Gargarin", "h":"He was a soviet Csomonaut."},
                                        {"q":"The Magna Carta was signed in which country?", "a": ["France","Germany","England","Italy"],"c":"England", "h":"It was signed by king John in 1215"},
-                                       {"q":"The Great Pyramid of Giza was built as a tomb for which pharaoh?", "a": ["Pharaoh Khufu","Cleopatra","Pharaoh of the Exodus","Shishak "],"c":"Pharaoh Khufu", "h":"He was the son of Pharaoh Sneferu, and his own son, Khafre, built the second-largest pyramid right next to his."}],
+                                       {"q":"The Great Pyramid of Giza was built as a tomb for which pharaoh?", "a": ["Pharaoh Khufu","Cleopatra","Pharaoh of the Exodus","Shishak "],"c":"Pharaoh Khufu", "h":"He was the son of Pharaoh Sneferu, and his own son, Khafre, built the second-largest pyramid right next to his."},
+                                       {"q":"What year did the Titanic sink on its first trip?", "a": ["1912 ","1967","1934","1913 "],"c":"1912 ", "h":"it was set in the 1900's"},
+                                       {"q":"Who was the first female pilot to fly alone across the Atlantic Ocean?", "a": ["Mr Malatai ","Amelia Earhart","Ruth Bader Ginsburg","Mary Wollstonecraft "],"c":"Amelia Earhart ", "h":"The pilot grew up in Atchison, Kansas, showing an adventurous spirit."},
+                                       {"q":"What wall fell in Germany in the year 1989?", "a": ["German ","Berlin","Canada","Russia "],"c":"Berlin", "h":"it was set in November 9, 1989."},
+                                       {"q":"Which Kiwi climber reached the top of Mount Everest first with Tenzing Norgay in 1953?", "a": ["Edmund Hillary ","Harry Ayres","Mark Inglis","Lydia Bradey"],"c":"Edmund Hillary", "h":"he climbed the mountain in 1989."}],
                   "General Knowledge":[{"q":"Which is the largest ocean on Earth?", "a": ["Atlantic Ocean","Indian Ocean","Arctic Ocean","Pacific Ocean"],"c":"Pacific Ocean","h":"It boarders the western coast of the Americans"},
                                         {"q":"How many elements are in the periodic table?", "a": ["98","118","108","128"],"c":"118","h":"The last element added was Oganesson"},
                                         {"q":"What is the capital city of France", "a": ["London","Rome","Paris","Berlin"],"c":"Paris","h":"Home to the Eiffel Tower"},
                                         {"q":"Which language has the most native speakers?", "a": ["English","Spanish","Mandarin","Hindi"],"c":"Mandarin","h":"It is spoken primarily in China."},
                                         {"q":"How many bones are in an adult human body?", "a": ["206","306","106","267"],"c":"206","h":"Babies actually have more bones than this."},
-                                        {"q":"What is the world’s tallest building?", "a": ["The Burj Khalifa","Merdeka 118","Shanghai Tower","eiffel tower"],"c":"The Burj Khalifa","h":"this building is located at Downtown Dubai, United Arab Emirates"}]}
+                                        {"q":"What is the world’s tallest building?", "a": ["The Burj Khalifa","Merdeka 118","Shanghai Tower","eiffel tower"],"c":"The Burj Khalifa","h":"this building is located at Downtown Dubai, United Arab Emirates"},
+                                        {"q":"What is the chemical symbol for gold?", "a": ["Ag","Au","Earth","Mars"],"c":"Mercury","h":" It is the smallest planet in our solar system."},
+                                        {"q":"Which planet is closest to the Sun?", "a": ["Venus","Mercury","Pb","Fe"],"c":"Au","h":"This symbol comes from the Latin word 'aurum'"},
+                                        {"q":"Who painted the Mona Lisa?", "a": [" Vincent van Gogh","Pablo Picasso","Leonardo da Vinci","MaClaude Monetrs"],"c":"Leonardo da Vinci","h":"  He was a famous Italian artist and inventor from the Renaissance."},
+                                        {"q":"What is the hardest natural substance on Earth?", "a": ["Diamond","iron","Gold","Quartz"],"c":"Diamond","h":"It is made purely of carbon"}]}
 
 
 
-        title_Label = tk.Label(root, text= "Quiz Maker",font=("Arial", 24, "bold"),  bg=bg_color)
+        title_Label = tk.Label(root, text= "Quiz Maker",font=("Consolas", 24, "bold"),  bg=bg_color)
         title_Label.pack(pady=30)
 
         start_button = tk.Button(root, text="Start Quiz",font=("Arial", 12), cursor="hand2",command=self.Open_Customization_Panel, bg=bg_color)
