@@ -13,7 +13,7 @@ class Quiz_Maker:
     def __init__(self, root):
         self.root = root
         self.root.title("Quiz Maker")
-        self.root.geometry("400x350")
+        self.root.geometry("400x150")
 
         bg_color="#ececec"
         self.root.configure(bg=bg_color)
@@ -53,8 +53,8 @@ class Quiz_Maker:
                                         {"q":"Which language has the most native speakers?", "a": ["English","Spanish","Mandarin","Hindi"],"c":"Mandarin","h":"It is spoken primarily in China."},
                                         {"q":"How many bones are in an adult human body?", "a": ["206","306","106","267"],"c":"206","h":"Babies actually have more bones than this."},
                                         {"q":"What is the world’s tallest building?", "a": ["The Burj Khalifa","Merdeka 118","Shanghai Tower","eiffel tower"],"c":"The Burj Khalifa","h":"this building is located at Downtown Dubai, United Arab Emirates"},
-                                        {"q":"What is the chemical symbol for gold?", "a": ["Ag","Au","Earth","Mars"],"c":"Mercury","h":" It is the smallest planet in our solar system."},
-                                        {"q":"Which planet is closest to the Sun?", "a": ["Venus","Mercury","Pb","Fe"],"c":"Au","h":"This symbol comes from the Latin word 'aurum'"},
+                                        {"q":"What is the chemical symbol for gold?", "a": ["Ag","Au","pb","fe"],"c":"Au","h":"This symbol comes from the Latin word 'aurum'"},
+                                        {"q":"Which planet is closest to the Sun?", "a": ["Venus","Mercury","Earth","Mars"],"c":"Mercury","h":"It is the smallest planet in our solar system."},
                                         {"q":"Who painted the Mona Lisa?", "a": [" Vincent van Gogh","Pablo Picasso","Leonardo da Vinci","MaClaude Monetrs"],"c":"Leonardo da Vinci","h":"  He was a famous Italian artist and inventor from the Renaissance."},
                                         {"q":"What is the hardest natural substance on Earth?", "a": ["Diamond","iron","Gold","Quartz"],"c":"Diamond","h":"It is made purely of carbon"}]}
 
@@ -71,7 +71,7 @@ class Quiz_Maker:
     def Open_Customization_Panel(self):
         self.setting_window = tk.Toplevel(self.root)
         self.setting_window.title("Customization Panel")
-        self.setting_window.geometry("500x450")
+        self.setting_window.geometry("300x250")
 
 
         tk.Label(self.setting_window, text="Select a number of questions").pack()
@@ -117,6 +117,7 @@ class Quiz_Maker:
 
         self.current_question_index = 0
         self.score = 0
+        self.incorrect_answers = []
 
         self.question_list = random.sample(
             available_questions,
@@ -129,7 +130,7 @@ class Quiz_Maker:
     def Open_Quiz_Window(self):
         self.Quiz_Window = tk.Toplevel(self.root)
         self.Quiz_Window.title("Quiz")
-        self.Quiz_Window.geometry("500x400")
+        self.Quiz_Window.geometry("500x300")
 
         self.question_label = tk.Label(self.Quiz_Window, text = "", font = ("Arial",14), wraplength=550)
         self.question_label.pack(pady=20)
@@ -179,16 +180,47 @@ class Quiz_Maker:
 
         if selected == current_question["c"]:
             self.score += 1
+        else:
+            self.incorrect_answers.append({
+                "Question":current_question["q"],
+                "your_answer":selected,
+                "Correct_answer":current_question["c"]
+            })
+
         self.current_question_index += 1
 
         if self.current_question_index < self.total_questions:
             self.show_question()
         else:
-            messagebox.showinfo("Quiz Complete",f"Final Score: {self.score}/{self.total_questions}",)
+            self.show_result()
             self.Quiz_Window.destroy()
+    def show_result(self):
+        result_text = f"Final Score: {self.score}/{self.total_questions}\n\n"
+
+        if self.incorrect_answers:
+            result_text += "Question You got wrong:\n\n"
+
+            for i, item in enumerate(self.incorrect_answers, start=1):
+                result_text += (
+                f"{i}. {item['Question']}\n"
+                f"  Your answer: {item['Your_answers']}\n"
+                f"  Correct answer{item['Correct_answers']}\n\n")
+        else:
+            result_text += "Perfect score! You got every question correct!"
+
+        result_window = tk.Toplevel(self.root)
+        result_window.title("Quiz Result")
+        result_window.geometry("650x450")
+
+        text = tk.Text(result_window, wrap="word", font=("Arial",11))
+        text.pack(fill = "both",expand=True, padx=10,pady=10)
+
+        text.insert("1.0",result_text)
+        text.config(state="disabled")
+
 
         
-if __name__  == "__main__":
+if __name__  == "__main__": 
     root = tk.Tk()
     app = Quiz_Maker(root)
     root.mainloop()
