@@ -159,7 +159,7 @@ class Quiz_Maker:
         self.question_label.config(text=f"Q{self.current_question_index + 1}: {question['q']}")
 
 
-        self.answer_var.set("None")
+        self.answer_var.set("")
 
         for i, answer in enumerate(question["a"]):
             self.option_button[i].config(text = answer, value = answer)
@@ -182,9 +182,9 @@ class Quiz_Maker:
             self.score += 1
         else:
             self.incorrect_answers.append({
-                "Question":current_question["q"],
-                "your_answer":selected,
-                "Correct_answer":current_question["c"]
+                f"Question":current_question["q"],
+                f"your_answer":selected,
+                f"Correct_answer":current_question["c"]
             })
 
         self.current_question_index += 1
@@ -198,15 +198,17 @@ class Quiz_Maker:
         result_text = f"Final Score: {self.score}/{self.total_questions}\n\n"
 
         if self.incorrect_answers:
-            result_text += "Question You got wrong:\n\n"
+            result_text +=  "Questions You Got Wrong:\n\n"
 
-            for i, item in enumerate(self.incorrect_answers, start=1):
+
+            for i, item in enumerate(self.incorrect_answers,start=1):
                 result_text += (
-                f"{i}. {item['Question']}\n"
-                f"  Your answer: {item['Your_answers']}\n"
-                f"  Correct answer{item['Correct_answers']}\n\n")
+                    f"{i}. {item['Question']}\n\n"
+                    f"   Your_answer:{item['your_answer']}\n"
+                    f"   Correct_answer:{item['Correct_answer']}\n\n"
+                )
         else:
-            result_text += "Perfect score! You got every question correct!"
+            result_text += "Perfect score! you got every questions right!" 
 
         result_window = tk.Toplevel(self.root)
         result_window.title("Quiz Result")
